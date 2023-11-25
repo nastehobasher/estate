@@ -1,7 +1,7 @@
 import jwt  from 'jsonwebtoken'
 import User from '../models/user.model.js'
 import bcrypt from'bcrypt'
-
+import { errorHandler } from'../utils/error.js'
 
 export const signup = async(req,res,next) => {
     const {username,email,password} =req.body
@@ -15,6 +15,7 @@ export const signup = async(req,res,next) => {
         next(error)
     }
 }
+
 export const signIn = async(req,res,next) => {
     const {email,password} =req.body
     // encrypted password
