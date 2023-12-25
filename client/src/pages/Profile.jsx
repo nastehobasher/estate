@@ -20,6 +20,7 @@ export default function Profile() {
   // allow write: if
   // request.resource.size < 2 * 1024 * 1024 &&
   // request.resource.contentType.matches('image/.*')
+  
   useEffect(()=>{
     if(file){
       handleFileUpload(file);
@@ -29,6 +30,7 @@ export default function Profile() {
   const handleFileUpload = (file) =>{
     const storage = getStorage(app)
     const fileName = new Date().getTime() + file.name
+    console.log('----',fileName);
     //where to save avatar
     const storageRef = ref(storage,fileName)
     const uploadTask= uploadBytesResumable(storageRef, file)
@@ -41,6 +43,7 @@ export default function Profile() {
         setFilePerc(Math.round(progress));
       },
       (error) => {
+        console.log('err',error);
         setFileUploadErro(true);
       },
       () => {
