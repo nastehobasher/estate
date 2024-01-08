@@ -208,6 +208,7 @@ export default function Profile() {
           Sign out
         </span>
       </div>
+      {/* <p>Show listing</p> */}
       {/* <p className='text-red-700 mt-5'>{ error ? error : ''}</p> */}
       <p className="text-green-700 mt-5">
         {error ? "user is updated succesfuly" : ""}
