@@ -58,7 +58,7 @@ export const getUserListing = async (req, res, next) => {
     try {
       const listings = await Listing.find({ userRef: req.params.id });
       res.status(200).json(listings);
-      console.log(listings);
+      // console.log(listings);
     } catch (error) {
       next(error);
     }
