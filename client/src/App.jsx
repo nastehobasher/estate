@@ -10,6 +10,7 @@ import PrivateRoute from './components/PrivateRoute'
 import CreateList from './pages/CreateList'
 import UpdateListing from './pages/UpdateListing'
 import Listing from './pages/Listing'
+import Search from './pages/Search'
 function App() {
   return (
     <BrowserRouter className='text-red-500'>
@@ -19,6 +20,7 @@ function App() {
         <Route path="/sign-in" element={<Signin/>}></Route>
         <Route path="/sign-up" element={<SignUp/>}></Route>
         <Route path="/about" element={<About/>}></Route>
+        <Route path="/search" element={<Search/>}></Route>
         <Route path="/listing/:listingId" element={<Listing/>}></Route>
 
         <Route element={<PrivateRoute/>}>
