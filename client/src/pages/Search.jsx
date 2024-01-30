@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ListingItem from "../components/ListingItem";
 
 export default function Search() {
   const navigate = useNavigate();
@@ -12,8 +13,8 @@ export default function Search() {
     sort: "created_at",
     order: "desc",
   });
-  const [loading,setLoading] = useState(false)
-  const [listings,setListings] = useState([])
+  const [loading, setLoading] = useState(false);
+  const [listings, setListings] = useState([]);
 
   console.log(listings);
   useEffect(() => {
@@ -35,29 +36,29 @@ export default function Search() {
       sortFormUrl ||
       orderFormUrl
     ) {
-        setSidebardata({
-            searchTerm: searchTermFormUrl || '',
-            type:typeFormUrl || 'all',
-            parking: parkingFormUrl ==='true' ? true : false,
-            furnished: furnishedFormUrl === 'true' ? true: false,
-            offer: offerFormUrl === 'true' ? true: false,
-            sort:sortFormUrl || 'created_at',
-            order:orderFormUrl || 'desc'
-,        })
+      setSidebardata({
+        searchTerm: searchTermFormUrl || "",
+        type: typeFormUrl || "all",
+        parking: parkingFormUrl === "true" ? true : false,
+        furnished: furnishedFormUrl === "true" ? true : false,
+        offer: offerFormUrl === "true" ? true : false,
+        sort: sortFormUrl || "created_at",
+        order: orderFormUrl || "desc",
+      });
     }
 
-    const fetchListings = async()=>{
-        setLoading(true)
-        const searchQuery = urlParams.toString()
-        const res = await fetch(`api/listing/get?${searchQuery}`);
-        const data = await res.json()
+    const fetchListings = async () => {
+      setLoading(true);
+      const searchQuery = urlParams.toString();
+      const res = await fetch(`api/listing/get?${searchQuery}`);
+      const data = await res.json();
 
-        setListings(data)
-        setLoading(false)
-    }
+      setListings(data);
+      setLoading(false);
+    };
 
-    fetchListings()
-  },[location.search]);
+    fetchListings();
+  }, [location.search]);
 
   const handleChange = (e) => {
     if (
@@ -212,10 +213,24 @@ export default function Search() {
           </button>
         </form>
       </div>
-      <div className="">
+      <div className="flex-1">
         <h1 className="text-3xl font-semibold border-b p-3 text-slate-700 mt-5">
           Listing results
         </h1>
+        <div className="p-7 flex flex-wrap gap-4">
+          {!loading && listings.length === 0 && (
+            <p className="text-slate-700 text-xl ">No Listing found!</p>
+          )}
+          {loading && (
+            <p className="text-slate-700 text-xl w-full text-center">
+              Loading...
+            </p>
+          )}
+          {!loading &&
+            listings.map((listing) => (
+              <ListingItem key={listing._id} listing={listing} />
+            ))}
+        </div>
       </div>
     </div>
   );
