@@ -11,6 +11,7 @@ import CreateList from './pages/CreateList'
 import UpdateListing from './pages/UpdateListing'
 import Listing from './pages/Listing'
 import Search from './pages/Search'
+import Footer from './components/Footer'
 function App() {
   return (
     <BrowserRouter className='text-red-500'>
@@ -29,6 +30,7 @@ function App() {
         <Route path="/update-listing/:listingId" element={<UpdateListing/>}></Route>
         </Route>
       </Routes>
+      <Footer/>
       </BrowserRouter>
   )
 }
